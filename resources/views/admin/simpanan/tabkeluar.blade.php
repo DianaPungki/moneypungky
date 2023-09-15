@@ -41,7 +41,7 @@
                       <th class="none">Nama</th>
                       <th class="none">Bank</th>
                       <th class="none">Kategori</th>
-                      <th class="none">Tanggal</th>
+                      <th class="">Tanggal</th>
                       <th class="none">Created-At</th>
                       <th class="none">Updated-At</th>
                       <th>Action</th>
