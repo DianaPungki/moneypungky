@@ -18,6 +18,7 @@ class TabMasukController extends Controller
             'title'     => 'Transaksi Masuk', 
             'tabmasuk'  => TabMasuk::join('bank','tab_masuk.id_bank','bank.id_bank')
                                     ->join('kategori','tab_masuk.id_kat','kategori.id_kat')
+                                    ->orderBy('tanggal_masuk','ASC')
                                     ->get(),
             'bank'      => Bank::all(),
             'kategori'      => Kategori::all(),
@@ -32,6 +33,7 @@ class TabMasukController extends Controller
             'jumlah_masuk' => 'required|numeric',
             'id_bank' => 'required',
             'id_kat' => 'required',
+            'tanggal_masuk' => 'required',
         ]);
     
         if ($validator->fails())
@@ -47,6 +49,7 @@ class TabMasukController extends Controller
             'jumlah_masuk' => $request->input('jumlah_masuk'),
             'id_bank' => $request->input('id_bank'),
             'id_kat' => $request->input('id_kat'),
+            'tanggal_masuk' => $request->input('tanggal_masuk'),
         ];
 
         TabMasuk::create($data);
@@ -70,6 +73,7 @@ class TabMasukController extends Controller
             'jumlah_masuk' => 'required|numeric',
             'id_bank' => 'required',
             'id_kat' => 'required',
+            'tanggal_masuk' => 'required',
         ]);
     
         if ($validator->fails())
@@ -85,6 +89,7 @@ class TabMasukController extends Controller
             'jumlah_masuk' => $request->input('jumlah_masuk'),
             'id_bank' => $request->input('id_bank'),
             'id_kat' => $request->input('id_kat'),
+            'tanggal_masuk' => $request->input('tanggal_masuk'),
         ];
 
         TabMasuk::where('id_masuk', $request->post('id_masuk'))->update($data);

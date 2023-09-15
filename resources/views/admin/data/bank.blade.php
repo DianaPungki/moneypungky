@@ -37,9 +37,9 @@
                     <tr>
                       <th style="width: 10px">No</th>
                       <th>Nama</th>
+                      <th class="none">Created-At</th>
+                      <th class="none">Updated-At</th>
                       <th>Action</th>
-                      <th style="d-none">Created-At</th>
-                      <th>Updated-At</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -47,6 +47,8 @@
                       <tr>
                         <td>{{ $no+1 }}</td>
                         <td>{{ $b->nama_bank }}</td>
+                        <td>{{ $b->created_at }}</td>
+                        <td>{{ $b->updated_at }}</td>
                         <td>
                           <div class="btn-group btn-group-sm">
                             <div class="btn btn-success">
@@ -59,8 +61,6 @@
                             </div>
                           </div>
                         </td>
-                        <td>{{ $b->created_at }}</td>
-                        <td>{{ $b->updated_at }}</td>
                       </tr>
                     @endforeach
                   </tbody>

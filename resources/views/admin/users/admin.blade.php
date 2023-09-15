@@ -37,6 +37,8 @@
                       <th style="width: 10px">No</th>
                       <th>Nama</th>
                       <th>Email</th>
+                      <th>Created-at</th>
+                      <th>Updated-at</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -45,6 +47,8 @@
                         <td>{{ $no+1 }}</td>
                         <td>{{ $a->nama_admin }}</td>
                         <td>{{ $a->email_admin }}</td>
+                        <td>{{ $a->created_at }}</td>
+                        <td>{{ $a->updated_at }}</td>
                       </tr>
                     @endforeach
                   </tbody>

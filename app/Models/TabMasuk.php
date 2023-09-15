@@ -16,6 +16,7 @@ class TabMasuk extends Model
         'jumlah_masuk',
         'id_bank',
         'id_kat',
+        'tanggal_masuk',
     ];
 
     public $timestamps = true;

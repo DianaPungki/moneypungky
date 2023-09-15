@@ -16,6 +16,7 @@ class TabKeluar extends Model
         'jumlah_keluar',
         'id_bank',
         'id_kat',
+        'tanggal_keluar',
     ];
 
     public $timestamps = true;

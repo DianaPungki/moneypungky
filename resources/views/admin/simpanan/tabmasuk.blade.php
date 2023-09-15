@@ -38,12 +38,13 @@
                     <tr>
                       <th style="width: 10px">No</th>
                       <th>Jumlah</th>
-                      <th>Nama</th>
-                      <th>Bank</th>
-                      <th>Kategori</th>
+                      <th class="none">Nama</th>
+                      <th class="none">Bank</th>
+                      <th class="none">Kategori</th>
+                      <th class="none">Tanggal</th>
+                      <th class="none">Created-At</th>
+                      <th class="none">Updated-At</th>
                       <th>Action</th>
-                      <th>Created-At</th>
-                      <th>Updated-At</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -54,6 +55,9 @@
                         <td>{{ $t->nama_masuk }}</td>
                         <td>{{ $t->nama_bank }}</td>
                         <td>{{ $t->nama_kat }}</td>
+                        <td>{{ $t->tanggal_masuk }}</td>
+                        <td>{{ $t->created_at }}</td>
+                        <td>{{ $t->updated_at }}</td>
                         <td>
                           <div class="btn-group btn-group-sm">
                             <div class="btn btn-success">
@@ -66,8 +70,6 @@
                             </div>
                           </div>
                         </td>
-                        <td>{{ $t->created_at }}</td>
-                        <td>{{ $t->updated_at }}</td>
                       </tr>
                     @endforeach
                   </tbody>
@@ -135,6 +137,15 @@
                                     <strong id="id_kat-error"></strong>
                                 </span>
                             </div>
+                        </div>
+                        <div class="mb-3 row">
+                          <label for="tanggal_masuk" class="col-sm-2 col-form-label">Tanggal</label>
+                          <div class="col-sm-10">
+                              <input type="date" class="form-control" name="tanggal_masuk">
+                              <span class="text-danger">
+                                  <strong id="tanggal_masuk-error"></strong>
+                              </span>
+                          </div>
                         </div>
                       </div>
                       <div class="modal-footer justify-content-between">
@@ -211,6 +222,15 @@
                                     <strong id="id_kat-erroru"></strong>
                                 </span>
                             </div>
+                          </div>
+                          <div class="mb-3 row">
+                            <label for="tanggal_masuk" class="col-sm-2 col-form-label">Tanggal</label>
+                            <div class="col-sm-10">
+                                <input type="date" class="form-control" name="tanggal_masuk" id="tanggal_masuk">
+                                <span class="text-danger">
+                                    <strong id="tanggal_masuk-erroru"></strong>
+                                </span>
+                            </div>
                         </div>
                       </div>
                       <div class="modal-footer justify-content-between">
@@ -239,7 +259,6 @@
   </div>
 
 <!-- jQuery -->
-<script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
 
 <script>
   $(function () {
@@ -251,7 +270,16 @@
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     
   });
+  
+  
+  
+  
+  
+</script>
+@endsection
 
+<script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
+<script>
   $(document).ready(function () {
       $('.spinner').hide();
 
@@ -298,6 +326,7 @@
                   $('#jumlah_masuk').val(data[0].jumlah_masuk);
                   $('#id_bank').val(data[0].id_bank);
                   $('#id_kat').val(data[0].id_kat);
+                  $('#tanggal_masuk').val(data[0].tanggal_masuk);
 
                   $('#ModalEdit').modal('show');
               },
@@ -363,4 +392,3 @@
       
     });
 </script>
-@endsection

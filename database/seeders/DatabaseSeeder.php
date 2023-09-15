@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
          \App\Models\Admin::create([
              'nama_admin' => 'Admin',
              'email_admin' => 'admin@gmail.com',
-             'password' => Hash::make('379'),
+             'password' => Hash::make('PunkAzmi379*'),
          ]);
          \App\Models\Bank::create([
              'nama_bank' => 'BRI',

@@ -38,17 +38,27 @@
                       <th style="width: 10px">No</th>
                       <th>Masuk</th>
                       <th>Keluar</th>
+                      <th class="none">Nama</th>
+                      <th class="none">Bank</th>
+                      <th class="none">Kategori</th>
+                      <th class="none">Tanggal</th>
+                      <th class="none">Created-At</th>
+                      <th class="none">Updated-At</th>
                       {{-- <th>Action</th> --}}
-                      <th style="d-none">Created-At</th>
-                      <th>Updated-At</th>
                     </tr>
                   </thead>
                   <tbody>
-                    @foreach ($perbankmasuk as $no=>$p )
+                    @foreach ($perbank as $no=>$p )
                       <tr>
                         <td>{{ $no+1 }}</td>
                         <td> Rp. {{ number_format ($p->jumlah_masuk,0,',','.')  }}</td>
                         <td> Rp. {{ number_format ($p->jumlah_keluar,0,',','.')  }}</td>
+                        <td>{{ $p->nama }}</td>
+                        <td>{{ $p->nama_bank }}</td>
+                        <td>{{ $p->nama_kat }}</td>
+                        <td>{{ $p->tanggal }}</td>
+                        <td>{{ $p->created_at }}</td>
+                        <td>{{ $p->updated_at }}</td>
                         {{-- <td>
                           <div class="btn-group btn-group-sm">
                             <div class="btn btn-success">
@@ -61,29 +71,6 @@
                             </div>
                           </div>
                         </td> --}}
-                        <td>{{ $p->created_at }}</td>
-                        <td>{{ $p->updated_at }}</td>
-                      </tr>
-                    @endforeach
-                    @foreach ($perbankkeluar as $no=>$p )
-                      <tr>
-                        <td>{{ $no+1 }}</td>
-                        <td> Rp. {{ number_format ($p->jumlah_masuk,0,',','.')  }}</td>
-                        <td> Rp. {{ number_format ($p->jumlah_keluar,0,',','.')  }}</td>
-                        {{-- <td>
-                          <div class="btn-group btn-group-sm">
-                            <div class="btn btn-success">
-                              <a href="#" class="text-success bg-success border-0 edit-btn" data-toggle="modal" title="Edit" data-id="{{ $p->id_bank }}"><i
-                                  class='fas fa-edit'></i></a>
-                            </div>
-                            <div class="btn btn-danger">
-                              <a href="#" class="text-danger bg-danger border-0 delete-btn" data-toggle="modal" title="Hapus" data-id="{{ $p->id_bank }}"><i
-                                  class='fas fa-trash'></i></a>
-                            </div>
-                          </div>
-                        </td> --}}
-                        <td>{{ $p->created_at }}</td>
-                        <td>{{ $p->updated_at }}</td>
                       </tr>
                     @endforeach
                   </tbody>
@@ -92,10 +79,16 @@
                       <th>Total</th>
                       <th>Rp. {{ number_format ($jummasuk,0,',','.')  }}</th>
                       <th>Rp. {{ number_format ($jumkeluar,0,',','.')  }}</th>
-                      <th><h3>Rp. {{ number_format ($jummasuk-$jumkeluar,0,',','.')  }}</h3></th>
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                      <th></th>
                     </tr>
                   </tfoot>
                 </table>
+                <h3>Total Rp. {{ number_format ($jummasuk-$jumkeluar,0,',','.')  }}</h3>
               </div>
               <!-- /.card-body -->
 

@@ -37,11 +37,11 @@
                     <tr>
                       <th style="width: 10px">No</th>
                       <th>Kategori</th>
-                      <th>Deskripsi</th>
-                      <th>Kantong</th>
+                      <th class="none">Deskripsi</th>
+                      <th class="none">Kantong</th>
+                      <th class="none">Created-At</th>
+                      <th class="none">Updated-At</th>
                       <th>Action</th>
-                      <th>Created-At</th>
-                      <th>Updated-At</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -58,6 +58,8 @@
                           <span class="badge badge-danger">No</span>
                         @endif
                       </td>
+                      <td>{{ $k->created_at }}</td>
+                      <td>{{ $k->updated_at }}</td>
                       <td>
                         <div class="btn-group btn-group-sm">
                           <div class="btn btn-success">
@@ -70,8 +72,6 @@
                           </div>
                         </div>
                       </td>
-                      <td>{{ $k->created_at }}</td>
-                      <td>{{ $k->updated_at }}</td>
                     </tr>
                   @endforeach
                 </tbody>

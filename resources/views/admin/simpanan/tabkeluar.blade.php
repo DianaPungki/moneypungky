@@ -38,12 +38,13 @@
                     <tr>
                       <th style="width: 10px">No</th>
                       <th>Jumlah</th>
-                      <th>Nama</th>
-                      <th>Bank</th>
-                      <th>Kategori</th>
+                      <th class="none">Nama</th>
+                      <th class="none">Bank</th>
+                      <th class="none">Kategori</th>
+                      <th class="none">Tanggal</th>
+                      <th class="none">Created-At</th>
+                      <th class="none">Updated-At</th>
                       <th>Action</th>
-                      <th>Created-At</th>
-                      <th>Updated-At</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -54,6 +55,9 @@
                         <td>{{ $t->nama_keluar }}</td>
                         <td>{{ $t->nama_bank }}</td>
                         <td>{{ $t->nama_kat }}</td>
+                        <td>{{ $t->tanggal_keluar }}</td>
+                        <td>{{ $t->created_at }}</td>
+                        <td>{{ $t->updated_at }}</td>
                         <td>
                           <div class="btn-group btn-group-sm">
                             <div class="btn btn-success">
@@ -66,8 +70,6 @@
                             </div>
                           </div>
                         </td>
-                        <td>{{ $t->created_at }}</td>
-                        <td>{{ $t->updated_at }}</td>
                       </tr>
                     @endforeach
                   </tbody>
@@ -136,6 +138,15 @@
                                 </span>
                             </div>
                         </div>
+                        <div class="mb-3 row">
+                          <label for="tanggal_keluar" class="col-sm-2 col-form-label">Tanggal</label>
+                          <div class="col-sm-10">
+                              <input type="date" class="form-control" name="tanggal_keluar">
+                              <span class="text-danger">
+                                  <strong id="tanggal_keluar-error"></strong>
+                              </span>
+                          </div>
+                      </div>
                       </div>
                       <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -212,6 +223,15 @@
                                 </span>
                             </div>
                         </div>
+                        <div class="mb-3 row">
+                          <label for="tanggal_keluar" class="col-sm-2 col-form-label">Tanggal</label>
+                          <div class="col-sm-10">
+                              <input type="date" class="form-control" name="tanggal_keluar" id="tanggal_keluar">
+                              <span class="text-danger">
+                                  <strong id="tanggal_keluar-erroru"></strong>
+                              </span>
+                          </div>
+                      </div>
                       </div>
                       <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -298,6 +318,7 @@
                   $('#jumlah_keluar').val(data[0].jumlah_keluar);
                   $('#id_bank').val(data[0].id_bank);
                   $('#id_kat').val(data[0].id_kat);
+                  $('#tanggal_keluar').val(data[0].tanggal_keluar);
 
                   $('#ModalEdit').modal('show');
               },

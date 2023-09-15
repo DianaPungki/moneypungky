@@ -159,6 +159,7 @@ return [
         /*
          * Package Service Providers...
          */
+        Recca0120\Terminal\TerminalServiceProvider::class,
 
         /*
          * Application Service Providers...
