@@ -27,11 +27,63 @@
 
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Data BANK {{ $bank->nama_bank }}</h3>
+                <h3 class="card-title">Data BANK {{ $bank->nama_bank }} {{ @$kantongfind->nama_kat }}</h3>
                 {{-- <a href="#" class="btn btn-primary btn-sm" type="button" style="float: right;" data-toggle="modal" data-target="#ModalAdd">Add Bank</a> --}}
               </div>
               <!-- /.card-header -->
               <div class="card-body">
+                <form action="{{ url('admin/bank/' . $bank->id_bank) }}" method="POST">
+                  @csrf
+                  <div class="mb-4 row">
+                      <label for="kantong" class="col-sm-1 col-form-label">Kantong</label>
+                      <div class="col-sm-4">
+                          <select name="kantong" class="form-control">
+                                  <option value="all" >All</option>
+                                  @if(empty($kantongfind->id_kat))
+                                    @foreach ($kantong as $k)
+                                      <option value="{{ $k->id_kat }}">{{ $k->nama_kat }}</option>
+                                    @endforeach
+                                  @else
+                                    @foreach ($kantong as $k)
+                                    <option value="{{ $k->id_kat }}" {{ $k->id_kat == $kantongfind['id_kat'] ? 'selected' : '' }}>{{ $k->nama_kat }}</option>
+                                    @endforeach
+                                  @endif
+                          </select>
+                      </div> 
+                  </div>
+                  {{-- <div class="mb-4 row">
+                      <label for="status" class="col-sm-1 col-form-label">Status</label>
+                      <div class="col-sm-6">
+                          <select name="status" class="form-select">
+                              @if (empty($as['status']))
+                                  <option value="all" >All</option>
+                                  <option value="A">Aktif</option>
+                                  <option value="C">Cuti</option>
+                                  <option value="D">Dropout</option>
+                                  <option value="K">Keluar</option>
+                                  <option value="L">Lulus</option>
+                                  <option value="N">Non Aktif</option>
+                              @else
+                                  <option value="all" {{ 'all' == $as['status'] ? 'selected' : '' }}>All</option>
+                                  <option value="A" {{ 'A' == $as['status'] ? 'selected' : '' }}>Aktif</option>
+                                  <option value="C" {{ 'C' == $as['status'] ? 'selected' : '' }}>Cuti</option>
+                                  <option value="D" {{ 'D' == $as['status'] ? 'selected' : '' }}>Dropout</option>
+                                  <option value="K" {{ 'K' == $as['status'] ? 'selected' : '' }}>Keluar</option>
+                                  <option value="L" {{ 'L' == $as['status'] ? 'selected' : '' }}>Lulus</option>
+                                  <option value="N" {{ 'N' == $as['status'] ? 'selected' : '' }}>Non Aktif</option>
+                              @endif
+                          </select>
+                      </div>  
+                      
+                  </div> --}}
+                  <div class="mb-3 row">
+                      <div class="col-sm-1">
+                      </div>
+                      <div class="col-sm-2">
+                          <button type="submit" class="btn btn-primary">Cari<i class="bx bx-search-alt-2"></i></button>
+                      </div>
+                  </div>
+              </form>
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                     <tr>
@@ -77,8 +129,8 @@
                   <tfoot>
                     <tr>
                       <th>Total</th>
-                      <th>Rp. {{ number_format ($jummasuk,0,',','.')  }}</th>
-                      <th>Rp. {{ number_format ($jumkeluar,0,',','.')  }}</th>
+                      <th>Rp. {{ number_format ($perbank->sum('jumlah_masuk'),0,',','.')  }}</th>
+                      <th>Rp. {{ number_format ($perbank->sum('jumlah_keluar'),0,',','.')  }}</th>
                       <th></th>
                       <th></th>
                       <th></th>
@@ -88,7 +140,30 @@
                     </tr>
                   </tfoot>
                 </table>
-                <h3>Total Rp. {{ number_format ($jummasuk-$jumkeluar,0,',','.')  }}</h3>
+
+                {{-- total semua --}}
+                <h3>Total Rp. {{ number_format ($perbank->sum('jumlah_masuk')-$perbank->sum('jumlah_keluar'),0,',','.')  }}</h3>
+
+                {{-- table perkantong --}}
+                <table id="example1" class="table table-bordered table-striped">
+                  <thead>
+                    <tr>
+                      <th>Kantong</th>
+                      <th>Jumlah</th>
+                    </tr>
+                    @foreach ($kantong as $k)
+                    @php
+                      $keluar = DB::table('tab_keluar')->where('id_bank',$bank->id_bank)->where('id_kat', $k->id_kat)->sum('jumlah_keluar');
+                      $total = $k->jml_masuk - $keluar
+                    @endphp
+                    <tr>
+                      <th>{{ $k->nama_kat }}</th>
+                      {{-- <td> Rp. {{ number_format ($k->jml_masuk ,0,',','.')  }} - Rp. {{ number_format ($keluar ,0,',','.')  }} = Rp. {{ number_format ($total ,0,',','.')  }}</td> --}}
+                      <td> Rp. {{ number_format ($total ,0,',','.')  }}</td>
+                    </tr>
+                    @endforeach
+                  </thead>
+                </table>
               </div>
               <!-- /.card-body -->
 

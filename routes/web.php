@@ -70,6 +70,7 @@ Route::middleware('auth:admin')->prefix('admin')->group(function() {
 
     // perbank
     Route::get('/bank/{bank}',[PerBankAdmin::class,'index']);
+    Route::post('/bank/{bank}',[PerBankAdmin::class,'filterkantong']);
 
     // perkantong
     Route::get('/kantong/{kantong}',[PerkantongAdmin::class,'index']);

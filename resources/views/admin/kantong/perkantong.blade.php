@@ -75,6 +75,12 @@
                       </tr>
                     @endforeach
                   </tbody>
+
+                  @if ($kantong->id_kat == '9a1ebf24-d4a3-414d-92ae-a4e2403f1153' || $kantong->id_kat=='9a1ebf94-c466-4d94-8776-1fde3c3259cf')
+                  <tfoot>
+
+                  </tfoot>
+                  @else
                   <tfoot>
                     <tr>
                       <th>Total</th>
@@ -88,8 +94,32 @@
                       <th></th>
                     </tr>
                   </tfoot>
+                  @endif
                 </table>
+
+                {{-- total semua --}}
                 <h3>Total Rp. {{ number_format ($jummasuk-$jumkeluar,0,',','.')  }}</h3>
+
+                {{-- table bank --}}
+                <table id="example1" class="table table-bordered table-striped">
+                  <thead>
+                    <tr>
+                      <th>Kantong</th>
+                      <th>Jumlah</th>
+                    </tr>
+                    @foreach ($bank as $b)
+                    @php
+                      $keluar = DB::table('tab_keluar')->where('id_kat',$kantong->id_kat)->where('id_bank', $b->id_bank)->sum('jumlah_keluar');
+                      $total = $b->jml_masuk - $keluar
+                    @endphp
+                    <tr>
+                      <th>{{ $b->nama_bank }}</th>
+                      {{-- <td> Rp. {{ number_format ($b->jml_masuk ,0,',','.')  }} - Rp. {{ number_format ($keluar ,0,',','.')  }} = Rp. {{ number_format ($total ,0,',','.')  }}</td> --}}
+                      <td> Rp. {{ number_format ($total ,0,',','.')  }}</td>
+                    </tr>
+                    @endforeach
+                  </thead>
+                </table>
               </div>
               <!-- /.card-body -->
 
