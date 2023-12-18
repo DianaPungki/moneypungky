@@ -259,7 +259,6 @@
   </div>
 
 <!-- jQuery -->
-<script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
 
 <script>
   $(function () {
@@ -271,8 +270,12 @@
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     
   });
+</script>
+@endsection
 
-  $(document).ready(function () {
+<script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
+<script>
+   $(document).ready(function () {
       $('.spinner').hide();
 
       $('[data-toggle="tooltip"]').tooltip();
@@ -359,29 +362,26 @@
 
       // Kirim data delete ke server
       $('.delete-btn').click(function(e){
-      e.preventDefault();
-      var confirmed = confirm('Delete Transaksi keluar ?');
+        e.preventDefault();
+        var confirmed = confirm('Delete Transaksi keluar ?');
 
-      if(confirmed) {
-          $.ajax({
-              data: {'id_keluar':$(this).data('id'), '_token': "{{csrf_token()}}"},
-              type: 'DELETE',
-              url : "{{url('admin/transaksi/keluar')}}",
-              success: function(data){
-                  swal.fire("Done !", data.pesan, "success");
-                  setTimeout(function(){
-                      location.reload();
-                  },2000);
-              },
-              error : function(err){
-                  alert(err);
-                  console.log(err);
-              }
-          });
-      }
+        if(confirmed) {
+            $.ajax({
+                data: {'id_keluar':$(this).data('id'), '_token': "{{csrf_token()}}"},
+                type: 'DELETE',
+                url : "{{url('admin/transaksi/keluar')}}",
+                success: function(data){
+                    swal.fire("Done !", data.pesan, "success");
+                    setTimeout(function(){
+                        location.reload();
+                    },2000);
+                },
+                error : function(err){
+                    alert(err);
+                    console.log(err);
+                }
+            });
+        }
       });
-
-      
     });
 </script>
-@endsection

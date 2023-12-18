@@ -271,10 +271,6 @@
     
   });
   
-  
-  
-  
-  
 </script>
 @endsection
 
