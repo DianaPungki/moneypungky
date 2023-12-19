@@ -11,16 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tab_masuk', function (Blueprint $table) {
-            $table->uuid('id_masuk')->primary();
-            $table->string('nama_masuk');
-            $table->string('jumlah_masuk');
+        Schema::create('transaksi', function (Blueprint $table) {
+            $table->uuid('id_trans')->primary();
+            $table->string('nama_trans');
+            $table->string('jumlah_masuk')->nullable();
+            $table->string('jumlah_keluar')->nullable();
 
             $table->string('id_bank');
             $table->foreign('id_bank')->references('id_bank')->on('bank')->onDelete('cascade')->onUpdate('cascade');
 
             $table->string('id_kat');
             $table->foreign('id_kat')->references('id_kat')->on('kategori')->onDelete('cascade')->onUpdate('cascade');
+
+            $table->date('tanggal_trans')->nullable();
+            $table->enum('status_trans',['masuk','keluar']);
 
             $table->timestamps();
         });
@@ -31,6 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tab_masuk');
+        Schema::dropIfExists('transaksi');
     }
 };

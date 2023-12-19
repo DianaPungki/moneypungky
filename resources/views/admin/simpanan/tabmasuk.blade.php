@@ -52,20 +52,20 @@
                       <tr>
                         <td>{{ $no+1 }}</td>
                         <td> Rp. {{ number_format ($t->jumlah_masuk,0,',','.')  }}</td>
-                        <td>{{ $t->nama_masuk }}</td>
+                        <td>{{ $t->nama_trans }}</td>
                         <td>{{ $t->nama_bank }}</td>
                         <td>{{ $t->nama_kat }}</td>
-                        <td>{{ $t->tanggal_masuk }}</td>
+                        <td>{{ $t->tanggal_trans }}</td>
                         <td>{{ $t->created_at }}</td>
                         <td>{{ $t->updated_at }}</td>
                         <td>
                           <div class="btn-group btn-group-sm">
                             <div class="btn btn-success">
-                              <a href="#" class="text-success bg-success border-0 edit-btn" data-toggle="modal" title="Edit" data-id="{{ $t->id_masuk }}"><i
+                              <a href="#" class="text-success bg-success border-0 edit-btn" data-toggle="modal" title="Edit" data-id="{{ $t->id_trans }}"><i
                                   class='fas fa-edit'></i></a>
                             </div>
                             <div class="btn btn-danger">
-                              <a href="#" class="text-danger bg-danger border-0 delete-btn" data-toggle="modal" title="Hapus" data-id="{{ $t->id_masuk }}"><i
+                              <a href="#" class="text-danger bg-danger border-0 delete-btn" data-toggle="modal" title="Hapus" data-id="{{ $t->id_trans }}"><i
                                   class='fas fa-trash'></i></a>
                             </div>
                           </div>
@@ -101,12 +101,12 @@
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <label for="nama_masuk" class="col-sm-2 col-form-label">Nama</label>
+                            <label for="nama_trans" class="col-sm-2 col-form-label">Nama</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="nama_masuk"
+                                <input type="text" class="form-control" name="nama_trans"
                                 placeholder="Nama Tabung" >
                                 <span class="text-danger">
-                                    <strong id="nama_masuk-error"></strong>
+                                    <strong id="nama_trans-error"></strong>
                                 </span>
                             </div>
                         </div>
@@ -139,11 +139,11 @@
                             </div>
                         </div>
                         <div class="mb-3 row">
-                          <label for="tanggal_masuk" class="col-sm-2 col-form-label">Tanggal</label>
+                          <label for="tanggal_trans" class="col-sm-2 col-form-label">Tanggal</label>
                           <div class="col-sm-10">
-                              <input type="date" class="form-control" name="tanggal_masuk">
+                              <input type="date" class="form-control" name="tanggal_trans">
                               <span class="text-danger">
-                                  <strong id="tanggal_masuk-error"></strong>
+                                  <strong id="tanggal_trans-error"></strong>
                               </span>
                           </div>
                         </div>
@@ -173,7 +173,7 @@
                     </div>
                     <form id="editForm">
                       @csrf
-                      <input type="hidden" class="form-control" name="id_masuk" id="id_masuk">
+                      <input type="hidden" class="form-control" name="id_trans" id="id_trans">
                       <div class="modal-body">
                         <div class="mb-3 row">
                             <label for="jumlah_masuk" class="col-sm-2 col-form-label">Jumlah</label>
@@ -186,12 +186,12 @@
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <label for="nama_masuk" class="col-sm-2 col-form-label">Nama</label>
+                            <label for="nama_trans" class="col-sm-2 col-form-label">Nama</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="nama_masuk" id="nama_masuk"
+                                <input type="text" class="form-control" name="nama_trans" id="nama_trans"
                                 placeholder="Nama Tabung" >
                                 <span class="text-danger">
-                                    <strong id="nama_masuk-erroru"></strong>
+                                    <strong id="nama_trans-erroru"></strong>
                                 </span>
                             </div>
                         </div>
@@ -224,11 +224,11 @@
                             </div>
                           </div>
                           <div class="mb-3 row">
-                            <label for="tanggal_masuk" class="col-sm-2 col-form-label">Tanggal</label>
+                            <label for="tanggal_trans" class="col-sm-2 col-form-label">Tanggal</label>
                             <div class="col-sm-10">
-                                <input type="date" class="form-control" name="tanggal_masuk" id="tanggal_masuk">
+                                <input type="date" class="form-control" name="tanggal_trans" id="tanggal_trans">
                                 <span class="text-danger">
-                                    <strong id="tanggal_masuk-erroru"></strong>
+                                    <strong id="tanggal_trans-erroru"></strong>
                                 </span>
                             </div>
                         </div>
@@ -313,16 +313,16 @@
       $('.edit-btn').click(function(e) {
           e.preventDefault();
           $.ajax({
-              data: {'id_masuk':$(this).data('id'), '_token': "{{csrf_token()}}"},
+              data: {'id_trans':$(this).data('id'), '_token': "{{csrf_token()}}"},
               type: 'POST',
               url : "{{url('admin/transaksi/masuk/edit')}}",
               success : function(data){
-                  $('#id_masuk').val(data[0].id_masuk);
-                  $('#nama_masuk').val(data[0].nama_masuk);
+                  $('#id_trans').val(data[0].id_trans);
+                  $('#nama_trans').val(data[0].nama_trans);
                   $('#jumlah_masuk').val(data[0].jumlah_masuk);
                   $('#id_bank').val(data[0].id_bank);
                   $('#id_kat').val(data[0].id_kat);
-                  $('#tanggal_masuk').val(data[0].tanggal_masuk);
+                  $('#tanggal_trans').val(data[0].tanggal_trans);
 
                   $('#ModalEdit').modal('show');
               },
@@ -368,7 +368,7 @@
 
       if(confirmed) {
           $.ajax({
-              data: {'id_masuk':$(this).data('id'), '_token': "{{csrf_token()}}"},
+              data: {'id_trans':$(this).data('id'), '_token': "{{csrf_token()}}"},
               type: 'DELETE',
               url : "{{url('admin/transaksi/masuk')}}",
               success: function(data){
