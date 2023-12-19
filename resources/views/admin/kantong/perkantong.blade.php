@@ -54,10 +54,10 @@
                         <td>{{ $no+1 }}</td>
                         <td> Rp. {{ number_format ($p->jumlah_masuk,0,',','.')  }}</td>
                         <td> Rp. {{ number_format ($p->jumlah_keluar,0,',','.')  }}</td>
-                        <td>{{ $p->nama }}</td>
+                        <td>{{ $p->nama_trans }}</td>
                         <td>{{ $p->nama_bank }}</td>
                         <td>{{ $p->nama_kat }}</td>
-                        <td>{{ $p->tanggal }}</td>
+                        <td>{{ $p->tanggal_trans }}</td>
                         <td>{{ $p->created_at }}</td>
                         <td>{{ $p->updated_at }}</td>
                         {{-- <td>
@@ -84,8 +84,8 @@
                   <tfoot>
                     <tr>
                       <th>Total</th>
-                      <th>Rp. {{ number_format ($jummasuk,0,',','.')  }}</th>
-                      <th>Rp. {{ number_format ($jumkeluar,0,',','.')  }}</th>
+                      <th>Rp. {{ number_format ($perkantong->sum('jumlah_masuk'),0,',','.')  }}</th>
+                      <th>Rp. {{ number_format ($perkantong->sum('jumlah_keluar'),0,',','.')  }}</th>
                       <th></th>
                       <th></th>
                       <th></th>
@@ -98,7 +98,7 @@
                 </table>
 
                 {{-- total semua --}}
-                <h3>Total Rp. {{ number_format ($jummasuk-$jumkeluar,0,',','.')  }}</h3>
+                <h3>Total Rp. {{ number_format ($perkantong->sum('jumlah_masuk')-$perkantong->sum('jumlah_keluar'),0,',','.')  }}</h3>
 
                 {{-- table bank --}}
                 <table id="example1" class="table table-bordered table-striped">
@@ -108,14 +108,9 @@
                       <th>Jumlah</th>
                     </tr>
                     @foreach ($bank as $b)
-                    @php
-                      $keluar = DB::table('tab_keluar')->where('id_kat',$kantong->id_kat)->where('id_bank', $b->id_bank)->sum('jumlah_keluar');
-                      $total = $b->jml_masuk - $keluar
-                    @endphp
                     <tr>
                       <th>{{ $b->nama_bank }}</th>
-                      {{-- <td> Rp. {{ number_format ($b->jml_masuk ,0,',','.')  }} - Rp. {{ number_format ($keluar ,0,',','.')  }} = Rp. {{ number_format ($total ,0,',','.')  }}</td> --}}
-                      <td> Rp. {{ number_format ($total ,0,',','.')  }}</td>
+                      <td> Rp. {{ number_format ($b->saldo ,0,',','.')  }}</td>
                     </tr>
                     @endforeach
                   </thead>

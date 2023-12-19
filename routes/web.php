@@ -4,8 +4,7 @@ use App\Http\Controllers\Admin\DashboardController as DashboardAdmin;
 use App\Http\Controllers\Admin\UserController as UserAdmin;
 use App\Http\Controllers\Admin\BankController as BankAdmin;
 use App\Http\Controllers\Admin\KategoriController as KategoriAdmin;
-use App\Http\Controllers\Admin\TabMasukController as TabMasukAdmin;
-use App\Http\Controllers\Admin\TabKeluarController as TabKeluarAdmin;
+use App\Http\Controllers\Admin\TransaksiController as TransaksiAdmin;
 use App\Http\Controllers\Admin\PerBankController as PerBankAdmin;
 use App\Http\Controllers\Admin\PerkantongController as PerkantongAdmin;
 use App\Http\Controllers\Auth\LoginController;
@@ -55,22 +54,21 @@ Route::middleware('auth:admin')->prefix('admin')->group(function() {
 
     Route::prefix('transaksi')->group(function() {
         // masuk
-        Route::get('masuk',[TabMasukAdmin::class,'index']);
-        Route::post('masuk/add',[TabMasukAdmin::class,'store']);
-        Route::post('masuk/edit',[TabMasukAdmin::class,'edit']);
-        Route::put('masuk',[TabMasukAdmin::class,'update']);
-        Route::delete('masuk',[TabMasukAdmin::class,'destroy']);
+        Route::get('masuk',[TransaksiAdmin::class,'index_masuk']);
+        Route::post('masuk/add',[TransaksiAdmin::class,'store_masuk']);
+        Route::post('masuk/edit',[TransaksiAdmin::class,'edit_masuk']);
+        Route::put('masuk',[TransaksiAdmin::class,'update_masuk']);
+        Route::delete('masuk',[TransaksiAdmin::class,'destroy_masuk']);
         // keluar
-        Route::get('keluar',[TabKeluarAdmin::class,'index']);
-        Route::post('keluar/add',[TabKeluarAdmin::class,'store']);
-        Route::post('keluar/edit',[TabKeluarAdmin::class,'edit']);
-        Route::put('keluar',[TabKeluarAdmin::class,'update']);
-        Route::delete('keluar',[TabKeluarAdmin::class,'destroy']);
+        Route::get('keluar',[TransaksiAdmin::class,'index_keluar']);
+        Route::post('keluar/add',[TransaksiAdmin::class,'store_keluar']);
+        Route::post('keluar/edit',[TransaksiAdmin::class,'edit_keluar']);
+        Route::put('keluar',[TransaksiAdmin::class,'update_keluar']);
+        Route::delete('keluar',[TransaksiAdmin::class,'destroy_keluar']);
     });
 
     // perbank
     Route::get('/bank/{bank}',[PerBankAdmin::class,'index']);
-    Route::post('/bank/{bank}',[PerBankAdmin::class,'filterkantong']);
 
     // perkantong
     Route::get('/kantong/{kantong}',[PerkantongAdmin::class,'index']);
