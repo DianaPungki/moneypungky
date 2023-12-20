@@ -93,7 +93,7 @@
                         <div class="mb-3 row">
                             <label for="jumlah_keluar" class="col-sm-2 col-form-label">Jumlah</label>
                             <div class="col-sm-10">
-                                <input type="number" class="form-control" name="jumlah_keluar"
+                                <input type="text" class="form-control" name="jumlah_keluar" onkeyup="formatRupiah(this)"
                                 placeholder="Jumlah Tabung" >
                                 <span class="text-danger">
                                     <strong id="jumlah_keluar-error"></strong>
@@ -178,7 +178,7 @@
                         <div class="mb-3 row">
                             <label for="jumlah_keluar" class="col-sm-2 col-form-label">Jumlah</label>
                             <div class="col-sm-10">
-                                <input type="number" class="form-control" name="jumlah_keluar" id="jumlah_keluar"
+                                <input type="text" class="form-control" name="jumlah_keluar" id="jumlah_keluar" onkeyup="formatRupiah(this)"
                                 placeholder="Jumlah Tabung" >
                                 <span class="text-danger">
                                     <strong id="jumlah_keluar-erroru"></strong>
@@ -384,4 +384,18 @@
         }
       });
     });
+
+
+    // format rupiah
+    function formatRupiah(input) {
+    var angka = input.value.replace(/\D/g, '');
+
+    angka = angka.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
+
+    input.value = angka;
+
+        if (angka.length === 0) {
+            input.value = '';
+        }
+    }
 </script>

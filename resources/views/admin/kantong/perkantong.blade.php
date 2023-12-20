@@ -52,8 +52,8 @@
                     @foreach ($perkantong as $no=>$p )
                       <tr>
                         <td>{{ $no+1 }}</td>
-                        <td> Rp. {{ number_format ($p->jumlah_masuk,0,',','.')  }}</td>
-                        <td> Rp. {{ number_format ($p->jumlah_keluar,0,',','.')  }}</td>
+                        <td> Rp. {{ number_format (@$p->jumlah_masuk,0,',','.')  }}</td>
+                        <td> Rp. {{ number_format (@$p->jumlah_keluar,0,',','.')  }}</td>
                         <td>{{ $p->nama_trans }}</td>
                         <td>{{ $p->nama_bank }}</td>
                         <td>{{ $p->nama_kat }}</td>
@@ -84,8 +84,8 @@
                   <tfoot>
                     <tr>
                       <th>Total</th>
-                      <th>Rp. {{ number_format ($perkantong->sum('jumlah_masuk'),0,',','.')  }}</th>
-                      <th>Rp. {{ number_format ($perkantong->sum('jumlah_keluar'),0,',','.')  }}</th>
+                      <th>Rp. {{ number_format (@$perkantong->sum('jumlah_masuk'),0,',','.')  }}</th>
+                      <th>Rp. {{ number_format (@$perkantong->sum('jumlah_keluar'),0,',','.')  }}</th>
                       <th></th>
                       <th></th>
                       <th></th>
