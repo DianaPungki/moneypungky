@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('transaksi', function (Blueprint $table) {
             $table->uuid('id_trans')->primary();
             $table->string('nama_trans');
-            $table->string('jumlah_masuk')->nullable();
-            $table->string('jumlah_keluar')->nullable();
+            $table->int('jumlah_masuk')->nullable();
+            $table->int('jumlah_keluar')->nullable();
 
             $table->string('id_bank');
             $table->foreign('id_bank')->references('id_bank')->on('bank')->onDelete('cascade')->onUpdate('cascade');

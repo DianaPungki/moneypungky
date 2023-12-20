@@ -39,6 +39,7 @@ class PerBankController extends Controller
             'perbank'   => $hasil,
             'bank'      => $bankfind,
             'kantong'   => $kantong,
+            'kategori'  => Kategori::all()
         ];
         return view('admin.bank.perbank', $data);
     }

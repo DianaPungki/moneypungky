@@ -32,7 +32,7 @@ class TransaksiController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'nama_trans' => 'required',
-            'jumlah_masuk' => 'required|numeric',
+            'jumlah_masuk' => 'required',
             'id_bank' => 'required',
             'id_kat' => 'required',
             'tanggal_trans' => 'required',
@@ -45,10 +45,12 @@ class TransaksiController extends Controller
                 'errors' => $validator->errors(),
             ], 400);
         }
+
+        $rupiahtanpatitik = str_replace(".", "", $request->input('jumlah_masuk'));
         
         $data = [
             'nama_trans' => $request->input('nama_trans'),
-            'jumlah_masuk' => $request->input('jumlah_masuk'),
+            'jumlah_masuk' => $rupiahtanpatitik,
             'id_bank' => $request->input('id_bank'),
             'id_kat' => $request->input('id_kat'),
             'tanggal_trans' => $request->input('tanggal_trans'),
@@ -73,7 +75,7 @@ class TransaksiController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'nama_trans' => 'required',
-            'jumlah_masuk' => 'required|numeric',
+            'jumlah_masuk' => 'required',
             'id_bank' => 'required',
             'id_kat' => 'required',
             'tanggal_trans' => 'required',
@@ -87,9 +89,10 @@ class TransaksiController extends Controller
             ], 400);
         }
         
+        $rupiahtanpatitik = str_replace(".", "", $request->input('jumlah_masuk'));
         $data = [
             'nama_trans' => $request->input('nama_trans'),
-            'jumlah_masuk' => $request->input('jumlah_masuk'),
+            'jumlah_masuk' => $rupiahtanpatitik,
             'id_bank' => $request->input('id_bank'),
             'id_kat' => $request->input('id_kat'),
             'tanggal_trans' => $request->input('tanggal_trans'),
@@ -132,7 +135,7 @@ class TransaksiController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'nama_trans' => 'required',
-            'jumlah_keluar' => 'required|numeric',
+            'jumlah_keluar' => 'required',
             'id_bank' => 'required',
             'id_kat' => 'required',
             'tanggal_trans' => 'required',
@@ -146,9 +149,11 @@ class TransaksiController extends Controller
             ], 400);
         }
         
+        $rupiahtanpatitik = str_replace(".", "", $request->input('jumlah_keluar'));
+
         $data = [
             'nama_trans' => $request->input('nama_trans'),
-            'jumlah_keluar' => $request->input('jumlah_keluar'),
+            'jumlah_keluar' => $rupiahtanpatitik,
             'id_bank' => $request->input('id_bank'),
             'id_kat' => $request->input('id_kat'),
             'tanggal_trans' => $request->input('tanggal_trans'),
@@ -173,7 +178,7 @@ class TransaksiController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'nama_trans' => 'required',
-            'jumlah_keluar' => 'required|numeric',
+            'jumlah_keluar' => 'required',
             'id_bank' => 'required',
             'id_kat' => 'required',
             'tanggal_trans' => 'required',
@@ -187,10 +192,12 @@ class TransaksiController extends Controller
                 'errors' => $validator->errors(),
             ], 400);
         }
+
+        $rupiahtanpatitik = str_replace(".", "", $request->input('jumlah_keluar'));
         
         $data = [
             'nama_trans' => $request->input('nama_trans'),
-            'jumlah_keluar' => $request->input('jumlah_keluar'),
+            'jumlah_keluar' => $rupiahtanpatitik,
             'id_bank' => $request->input('id_bank'),
             'id_kat' => $request->input('id_kat'),
             'tanggal_trans' => $request->input('tanggal_trans'),
